@@ -600,7 +600,7 @@ Gostaria de receber uma proposta personalizada.`;
           <div className="flex flex-col gap-3 text-sm md:items-end">
             <div className="flex items-center gap-3 md:justify-end">
               <a
-                className="footer-social-link"
+                className="footer-social-link footer-social-link-instagram"
                 href="https://instagram.com/drfmusical"
                 aria-label="Instagram do DRF Musical"
                 target="_blank"
@@ -609,7 +609,7 @@ Gostaria de receber uma proposta personalizada.`;
                 <InstagramIcon />
               </a>
               <a
-                className="footer-social-link footer-social-link-dark"
+                className="footer-social-link footer-social-link-whatsapp"
                 href={whatsappUrl(DEFAULT_WHATSAPP_MESSAGE)}
                 aria-label="WhatsApp do DRF Musical"
               >

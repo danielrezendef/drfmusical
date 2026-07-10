@@ -351,25 +351,26 @@ a {
   height: 2.75rem;
   width: 2.75rem;
   place-items: center;
-  border: 1px solid rgba(43, 32, 24, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.36);
   border-radius: 999px;
-  background: rgba(251, 247, 239, 0.72);
-  color: #2b2018;
+  color: #fff;
+  box-shadow: 0 12px 26px rgba(43, 32, 24, 0.12);
   transition:
     transform 180ms ease,
-    border-color 180ms ease,
-    color 180ms ease;
+    box-shadow 180ms ease;
 }
 
 .footer-social-link:hover {
   transform: translateY(-1px);
-  border-color: rgba(185, 147, 79, 0.5);
-  color: #b9934f;
+  box-shadow: 0 16px 34px rgba(43, 32, 24, 0.18);
 }
 
-.footer-social-link-dark {
-  background: #2b2018;
-  color: #fbf7ef;
+.footer-social-link-instagram {
+  background: radial-gradient(circle at 30% 105%, #feda75 0 22%, #fa7e1e 36%, #d62976 58%, #962fbf 76%, #4f5bd5 100%);
+}
+
+.footer-social-link-whatsapp {
+  background: #25d366;
 }
 
 .music-particles {
