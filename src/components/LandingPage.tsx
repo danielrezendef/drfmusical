@@ -6,6 +6,7 @@ import {
   DEFAULT_WHATSAPP_MESSAGE,
   EVENT_TYPES,
   INSTRUMENTS,
+  SOUND_SYSTEM_PRICE,
   type EventType,
   type InstrumentId,
   formatCurrency,
@@ -117,8 +118,7 @@ function GlobalArtisticBackground() {
 function ArtisticBackdrop() {
   return (
     <div className="absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
-      <div className="absolute inset-0 bg-[url('/fundo.png')] bg-cover bg-center opacity-[0.2] blur-[4px]" />
-      <div className="absolute inset-0 bg-ivory/78" />
+      <div className="absolute inset-0 bg-ivory/86" />
     </div>
   );
 }
@@ -168,16 +168,18 @@ export function LandingPage() {
   const [city, setCity] = useState("");
   const [eventDate, setEventDate] = useState("");
   const [selectedInstruments, setSelectedInstruments] = useState<InstrumentId[]>([]);
-  const [hasSimulated, setHasSimulated] = useState(false);
 
   const selectedInstrumentData = INSTRUMENTS.filter((instrument) =>
     selectedInstruments.includes(instrument.id),
   );
 
-  const estimate = selectedInstrumentData.reduce(
+  const instrumentsTotal = selectedInstrumentData.reduce(
     (total, instrument) => total + instrument.price,
     0,
   );
+  
+  const estimate =
+    selectedInstrumentData.length > 0 ? instrumentsTotal + SOUND_SYSTEM_PRICE : 0;
 
   const simulationMessage = useMemo(() => {
     const instruments =
@@ -195,36 +197,32 @@ Valor estimado: ${estimate ? formatCurrency(estimate) : "Não informado"}
 Gostaria de receber uma proposta personalizada.`;
   }, [city, estimate, eventDate, eventType, selectedInstrumentData]);
 
-  const floatingMessage = hasSimulated ? simulationMessage : DEFAULT_WHATSAPP_MESSAGE;
-
   function toggleInstrument(id: InstrumentId) {
     setSelectedInstruments((current) =>
       current.includes(id)
         ? current.filter((instrumentId) => instrumentId !== id)
         : [...current, id],
     );
-    setHasSimulated(true);
   }
 
   function sendSimulation() {
-    setHasSimulated(true);
     window.open(whatsappUrl(simulationMessage), "_blank", "noopener,noreferrer");
   }
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-ivory text-espresso">
+    <main className="relative min-h-screen overflow-hidden text-espresso">
       <GlobalArtisticBackground />
       <MusicParticles />
 
       <header className="fixed inset-x-0 top-0 z-50 border-b border-white/20 bg-ivory/36 backdrop-blur-xl transition">
-        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 sm:px-8">
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-3 sm:px-5">
           <a href="#inicio" className="flex items-center gap-3" aria-label="DRF Musical">
             <Image
               src="/logo-drf.png"
               alt="DRF Musical"
-              width={92}
-              height={54}
-              className="h-12 w-auto object-contain"
+              width={122}
+              height={72}
+              className="h-14 w-auto object-contain"
               priority
             />
           </a>
@@ -263,7 +261,12 @@ Gostaria de receber uma proposta personalizada.`;
                   {item.label}
                 </a>
               ))}
-              <a className="btn btn-dark mt-2" href={whatsappUrl(DEFAULT_WHATSAPP_MESSAGE)}>
+              <a
+                className="btn btn-dark mt-2"
+                href={whatsappUrl(DEFAULT_WHATSAPP_MESSAGE)}
+                target="_blank"
+                rel="noreferrer"
+              >
                 Orçamento
               </a>
             </nav>
@@ -272,9 +275,10 @@ Gostaria de receber uma proposta personalizada.`;
       </header>
 
       <section id="inicio" className="relative flex min-h-screen items-center overflow-hidden">
+        <div className="absolute inset-0 bg-ivory" />
         {!videoFailed && (
           <video
-            className="absolute inset-0 h-full w-full object-cover"
+            className="absolute inset-0 h-full w-full object-cover opacity-50"
             autoPlay
             muted
             loop
@@ -288,8 +292,8 @@ Gostaria de receber uma proposta personalizada.`;
         {videoFailed && (
           <div className="absolute inset-0 bg-[url('/fundo.png')] bg-cover bg-center" />
         )}
-        <div className="absolute inset-0 bg-gradient-to-b from-ivory/66 via-ivory/54 to-ivory/90" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.12),rgba(43,32,24,0.22))]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-ivory/88 via-cream/76 to-ivory/96" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,248,232,0.42),rgba(43,32,24,0.12))]" />
 
         <div className="relative z-10 mx-auto flex min-h-screen max-w-5xl flex-col items-center justify-center px-5 pb-14 pt-28 text-center">
           <Image
@@ -313,7 +317,12 @@ Gostaria de receber uma proposta personalizada.`;
             <button className="btn btn-gold" type="button" onClick={scrollToSimulator}>
               Simular orçamento
             </button>
-            <a className="btn btn-light" href={whatsappUrl(DEFAULT_WHATSAPP_MESSAGE)}>
+            <a
+              className="btn btn-light"
+              href={whatsappUrl(DEFAULT_WHATSAPP_MESSAGE)}
+              target="_blank"
+              rel="noreferrer"
+            >
               Chamar no WhatsApp
             </a>
           </div>
@@ -321,7 +330,7 @@ Gostaria de receber uma proposta personalizada.`;
       </section>
 
       <section id="sobre" className="section relative">
-        <ArtisticBackdrop />
+        <div className="absolute inset-0 -z-10 bg-ivory" aria-hidden="true" />
         <div className="section-inner grid items-center gap-12 lg:grid-cols-[1fr_1.1fr]">
           <div>
             <p className="eyebrow">Sobre</p>
@@ -336,7 +345,7 @@ Gostaria de receber uma proposta personalizada.`;
               cerimônias e recepções. Com formações musicais personalizadas, criamos a
               trilha sonora ideal para cada momento do seu grande dia.
             </p>
-            <div className="mt-8 grid gap-4 sm:grid-cols-3">
+            <div className="mt-6 grid gap-4 sm:grid-cols-3">
               {[
                 "Música ao vivo personalizada",
                 "Repertório escolhido com cuidado",
@@ -352,7 +361,8 @@ Gostaria de receber uma proposta personalizada.`;
         </div>
       </section>
 
-      <section id="momentos" className="section bg-cream/58">
+      <section id="momentos" className="section relative bg-cream/58">
+        <div className="absolute inset-0 bg-ivory" aria-hidden="true" />
         <div className="section-inner">
           <div className="max-w-3xl">
             <p className="eyebrow">Cerimônia</p>
@@ -364,7 +374,7 @@ Gostaria de receber uma proposta personalizada.`;
               quando acompanhados pela trilha sonora certa.
             </p>
           </div>
-          <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {weddingMoments.map((moment, index) => (
               <article key={moment} className="moment-card">
                 <span>{String(index + 1).padStart(2, "0")}</span>
@@ -397,22 +407,27 @@ Gostaria de receber uma proposta personalizada.`;
         </div>
       </section>
 
-      <section id="simulador" className="section bg-espresso text-ivory">
+      <section id="simulador" className="section simulator-section text-ivory">
         <div className="section-inner">
-          <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
             <div>
               <p className="eyebrow text-champagne">Simulador</p>
-              <h2 className="section-title text-ivory">
+              <h2 className="section-title simulator-heading">
                 Simule uma prévia do seu orçamento
               </h2>
-              <p className="section-subtitle text-ivory/72">
+              <p className="section-subtitle simulator-copy">
                 Escolha os instrumentos desejados e veja uma estimativa inicial para sua
                 formação musical.
               </p>
-              <p className="mt-8 rounded-2xl border border-champagne/24 bg-white/7 p-5 text-sm leading-7 text-ivory/70">
+              <p className="mt-6 rounded-2xl border border-champagne/24 bg-white/7 p-4 text-sm font-medium leading-7 text-ivory/86">
                 O valor apresentado é apenas uma simulação inicial. A proposta final pode
                 variar conforme data, local, duração, deslocamento e estrutura necessária.
               </p>
+              <div className="mt-4 flex justify-start">
+                <button className="btn btn-gold simulator-whatsapp-button" type="button" onClick={sendSimulation}>
+                  Enviar simulação pelo WhatsApp
+                </button>
+              </div>
             </div>
 
             <div className="simulator-panel">
@@ -421,10 +436,7 @@ Gostaria de receber uma proposta personalizada.`;
                   <span>Tipo de evento</span>
                   <select
                     value={eventType}
-                    onChange={(event) => {
-                      setEventType(event.target.value as EventType);
-                      setHasSimulated(true);
-                    }}
+                    onChange={(event) => setEventType(event.target.value as EventType)}
                   >
                     {EVENT_TYPES.map((type) => (
                       <option key={type}>{type}</option>
@@ -436,10 +448,7 @@ Gostaria de receber uma proposta personalizada.`;
                   <input
                     type="text"
                     value={city}
-                    onChange={(event) => {
-                      setCity(event.target.value);
-                      setHasSimulated(true);
-                    }}
+                    onChange={(event) => setCity(event.target.value)}
                     placeholder="Ex.: Itaúna/MG"
                   />
                 </label>
@@ -448,10 +457,7 @@ Gostaria de receber uma proposta personalizada.`;
                   <input
                     type="date"
                     value={eventDate}
-                    onChange={(event) => {
-                      setEventDate(event.target.value);
-                      setHasSimulated(true);
-                    }}
+                    onChange={(event) => setEventDate(event.target.value)}
                   />
                 </label>
               </div>
@@ -490,15 +496,13 @@ Gostaria de receber uma proposta personalizada.`;
                 )}
               </div>
 
-              <button className="btn btn-gold mt-5 w-full" type="button" onClick={sendSimulation}>
-                Enviar simulação pelo WhatsApp
-              </button>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="section bg-ivory">
+      <section className="section relative">
+        <ArtisticBackdrop />
         <div className="section-inner">
           <div className="max-w-3xl">
             <p className="eyebrow">Processo</p>
@@ -508,7 +512,7 @@ Gostaria de receber uma proposta personalizada.`;
               do evento para montar a proposta ideal.
             </p>
           </div>
-          <div className="mt-12 grid gap-4 md:grid-cols-4">
+          <div className="mt-8 grid gap-4 md:grid-cols-4">
             {[
               "Escolha a formação musical",
               "Simule uma estimativa",
@@ -524,111 +528,66 @@ Gostaria de receber uma proposta personalizada.`;
         </div>
       </section>
 
-      <section className="section relative bg-cream/55">
-        <div className="section-inner">
-          <div className="max-w-3xl">
-            <p className="eyebrow">Galeria</p>
-            <h2 className="section-title">Um pouco da nossa música</h2>
-          </div>
-          <div className="mt-10 grid gap-5 md:grid-cols-3">
-            {["Casamento", "Recepção", "Bastidores"].map((item) => (
-              <article key={item} className="gallery-card">
-                <div className="absolute inset-0 bg-[url('/fundo.png')] bg-cover bg-center" />
-                <div className="absolute inset-0 bg-espresso/50" />
-                <div className="relative z-10 flex h-full flex-col justify-between p-6 text-ivory">
-                  <span className="play-icon">▶</span>
-                  <h3>{item}</h3>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="duvidas" className="section relative">
+      <section id="duvidas" className="section faq-footer-section relative">
         <ArtisticBackdrop />
-        <div className="section-inner grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
-          <div>
-            <p className="eyebrow">FAQ</p>
-            <h2 className="section-title">Dúvidas frequentes</h2>
-          </div>
-          <div className="space-y-4">
-            {faqItems.map((item) => (
-              <details key={item.question} className="faq-item">
-                <summary>{item.question}</summary>
-                <p>{item.answer}</p>
-              </details>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section bg-espresso text-center text-ivory">
-        <div className="section-inner max-w-4xl">
-          <p className="eyebrow text-champagne">DRF Musical</p>
-          <h2 className="section-title text-ivory">
-            Seu grande dia merece uma trilha sonora especial.
-          </h2>
-          <p className="section-subtitle mx-auto text-ivory/72">
-            Simule sua formação musical ou fale conosco para receber uma proposta personalizada.
-          </p>
-          <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
-            <button className="btn btn-gold" type="button" onClick={scrollToSimulator}>
-              Simular orçamento
-            </button>
-            <a className="btn btn-outline" href={whatsappUrl(DEFAULT_WHATSAPP_MESSAGE)}>
-              Chamar no WhatsApp
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <footer className="bg-ivory px-5 py-12">
-        <div className="mx-auto flex max-w-7xl flex-col gap-8 md:flex-row md:items-center md:justify-between">
-          <div className="max-w-md">
-            <Image
-              src="/logo-drf.png"
-              alt="DRF Musical"
-              width={120}
-              height={72}
-              className="mb-4 h-auto w-28 object-contain"
-            />
-            <p className="font-display text-2xl font-semibold">
-              A trilha sonora do seu grande sonho
-            </p>
-          </div>
-          <div className="flex flex-col gap-3 text-sm md:items-end">
-            <div className="flex items-center gap-3 md:justify-end">
-              <a
-                className="footer-social-link footer-social-link-instagram"
-                href="https://instagram.com/drfmusical"
-                aria-label="Instagram do DRF Musical"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <InstagramIcon />
-              </a>
-              <a
-                className="footer-social-link footer-social-link-whatsapp"
-                href={whatsappUrl(DEFAULT_WHATSAPP_MESSAGE)}
-                aria-label="WhatsApp do DRF Musical"
-              >
-                <WhatsAppIcon />
-              </a>
+        <div className="section-inner flex min-h-full flex-col justify-between gap-7">
+          <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
+            <div>
+              <p className="eyebrow">FAQ</p>
+              <h2 className="section-title">Dúvidas frequentes</h2>
             </div>
-            <p className="text-espresso/55">© DRF Musical. Todos os direitos reservados.</p>
+            <div className="space-y-3">
+              {faqItems.map((item) => (
+                <details key={item.question} className="faq-item">
+                  <summary>{item.question}</summary>
+                  <p>{item.answer}</p>
+                </details>
+              ))}
+            </div>
           </div>
-        </div>
-      </footer>
 
-      <a
-        className="floating-whatsapp"
-        href={whatsappUrl(floatingMessage)}
-        target="_blank"
-        rel="noreferrer"
-      >
-        Orçamento
-      </a>
+          <footer className="footer-in-faq">
+            <div className="footer-in-faq-inner flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+              <div className="max-w-md">
+                <Image
+                  src="/logo-drf.png"
+                  alt="DRF Musical"
+                  width={120}
+                  height={72}
+                  className="mb-4 h-auto w-28 object-contain"
+                />
+                <p className="font-display text-2xl font-semibold">
+                  A trilha sonora do seu grande sonho
+                </p>
+              </div>
+              <div className="flex flex-col gap-3 text-sm md:items-end">
+                <div className="flex items-center gap-3 md:justify-end">
+                  <a
+                    className="footer-social-link footer-social-link-instagram"
+                    href="https://instagram.com/drfmusical"
+                    aria-label="Instagram do DRF Musical"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <InstagramIcon />
+                  </a>
+                  <a
+                    className="footer-social-link footer-social-link-whatsapp"
+                    href={whatsappUrl(DEFAULT_WHATSAPP_MESSAGE)}
+                    aria-label="WhatsApp do DRF Musical"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <WhatsAppIcon />
+                  </a>
+                </div>
+                <p className="text-ivory/55">© DRF Musical. Todos os direitos reservados.</p>
+              </div>
+            </div>
+          </footer>
+        </div>
+      </section>
+
     </main>
   );
 }

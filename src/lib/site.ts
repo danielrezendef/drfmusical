@@ -1,4 +1,4 @@
-export const WHATSAPP_NUMBER = "5537999999999";
+export const WHATSAPP_NUMBER = "5537999275292";
 
 export const DEFAULT_WHATSAPP_MESSAGE =
   "Olá! Vim pelo site do DRF Musical e gostaria de um orçamento para música ao vivo no meu casamento.";
@@ -12,6 +12,8 @@ export const INSTRUMENTS = [
   { id: "saxofone", name: "Saxofone", price: 600 },
   { id: "trompetes", name: "Trompetes (Clarinada)", price: 500 },
 ] as const;
+
+export const SOUND_SYSTEM_PRICE = 350;
 
 export const EVENT_TYPES = [
   "Casamento",

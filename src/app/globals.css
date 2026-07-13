@@ -11,10 +11,37 @@
   box-sizing: border-box;
 }
 
+html {
+  scrollbar-color: #b9934f #f2eadb;
+  scrollbar-width: thin;
+}
+
 body {
   margin: 0;
   background: #fbf7ef;
   color: #2b2018;
+}
+
+::-webkit-scrollbar {
+  width: 0.72rem;
+}
+
+::-webkit-scrollbar-track {
+  background: #f2eadb;
+}
+
+::-webkit-scrollbar-thumb {
+  border: 0.18rem solid #f2eadb;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #d7bd79, #8f6c35);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #c9a75d, #5d4633);
+}
+
+::-webkit-scrollbar-corner {
+  background: #f2eadb;
 }
 
 a {
@@ -27,8 +54,11 @@ a {
 }
 
 .section {
+  display: flex;
+  align-items: center;
+  min-height: 100svh;
   position: relative;
-  padding: 6rem 1.25rem;
+  padding: 4.5rem 1.25rem;
 }
 
 .section-inner {
@@ -36,6 +66,7 @@ a {
   z-index: 1;
   margin: 0 auto;
   max-width: 80rem;
+  width: 100%;
 }
 
 .site-art-background {
@@ -49,13 +80,13 @@ a {
 .site-art-background > div {
   position: absolute;
   inset: -2rem;
-  background-image:
-    linear-gradient(rgba(251, 247, 239, 0.72), rgba(251, 247, 239, 0.72)),
+  background:
+    linear-gradient(rgba(251, 247, 239, 0.58), rgba(251, 247, 239, 0.58)),
     url("/fundo.png");
   background-position: center;
   background-size: cover;
-  filter: blur(5px);
-  opacity: 0.32;
+  filter: blur(3px);
+  opacity: 0.36;
   transform: scale(1.04);
 }
 
@@ -70,17 +101,17 @@ a {
 
 .section-title {
   font-family: var(--font-display), Georgia, serif;
-  font-size: clamp(2.55rem, 5vw, 4.8rem);
+  font-size: clamp(2.35rem, 4.3vw, 4.25rem);
   font-weight: 600;
   line-height: 0.98;
   color: #2b2018;
 }
 
 .section-subtitle {
-  margin-top: 1.35rem;
+  margin-top: 1rem;
   max-width: 42rem;
   font-size: 1.08rem;
-  line-height: 1.8;
+  line-height: 1.65;
   color: rgba(43, 32, 24, 0.72);
 }
 
@@ -161,7 +192,7 @@ a {
 }
 
 .feature-card {
-  min-height: 11rem;
+  min-height: 9rem;
   border-radius: 1.25rem;
   padding: 1.35rem;
 }
@@ -169,7 +200,7 @@ a {
 .feature-card span,
 .reception-card span {
   display: inline-flex;
-  margin-bottom: 1.6rem;
+  margin-bottom: 1rem;
   color: #b9934f;
   font-size: 1.65rem;
 }
@@ -185,7 +216,7 @@ a {
 
 .moment-card {
   display: flex;
-  min-height: 6.1rem;
+  min-height: 4.95rem;
   align-items: center;
   gap: 1.1rem;
   border-radius: 1.15rem;
@@ -201,17 +232,39 @@ a {
 }
 
 .reception-card {
-  min-height: 9.4rem;
+  min-height: 7.6rem;
   border-radius: 1.2rem;
   padding: 1.35rem;
+}
+
+.simulator-section {
+  background:
+    radial-gradient(circle at 18% 18%, rgba(229, 209, 163, 0.12), transparent 34%),
+    linear-gradient(180deg, rgba(43, 32, 24, 0.94), rgba(43, 32, 24, 0.88));
+}
+
+.simulator-heading {
+  color: #fff8e8;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.34);
+}
+
+.simulator-copy {
+  color: rgba(255, 248, 232, 0.94);
+  font-weight: 500;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.28);
 }
 
 .simulator-panel {
   border: 1px solid rgba(229, 209, 163, 0.24);
   border-radius: 1.6rem;
   background: rgba(255, 255, 255, 0.08);
-  padding: clamp(1.2rem, 3vw, 2rem);
+  padding: clamp(1rem, 2.4vw, 1.5rem);
   box-shadow: 0 22px 70px rgba(0, 0, 0, 0.2);
+}
+
+.simulator-whatsapp-button {
+  min-height: 3rem;
+  padding-inline: 1.25rem;
 }
 
 .field {
@@ -224,12 +277,12 @@ a {
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgba(251, 247, 239, 0.72);
+  color: rgba(251, 247, 239, 0.9);
 }
 
 .field input,
 .field select {
-  min-height: 3.2rem;
+  min-height: 2.9rem;
   width: 100%;
   border: 1px solid rgba(229, 209, 163, 0.24);
   border-radius: 0.95rem;
@@ -247,7 +300,7 @@ a {
 
 .instrument-card {
   display: flex;
-  min-height: 4.25rem;
+  min-height: 3.65rem;
   align-items: center;
   justify-content: center;
   gap: 1rem;
@@ -273,43 +326,19 @@ a {
 }
 
 .instrument-card span {
+  color: rgba(251, 247, 239, 0.96);
   font-weight: 800;
 }
 
 .step-card {
-  min-height: 12rem;
+  min-height: 9.8rem;
   border-radius: 1.25rem;
   padding: 1.4rem;
 }
 
-.gallery-card {
-  position: relative;
-  min-height: 22rem;
-  overflow: hidden;
-  border-radius: 1.35rem;
-  box-shadow: 0 22px 55px rgba(43, 32, 24, 0.12);
-}
-
-.gallery-card h3 {
-  font-family: var(--font-display), Georgia, serif;
-  font-size: 2.3rem;
-  font-weight: 600;
-}
-
-.play-icon {
-  display: grid;
-  height: 3.3rem;
-  width: 3.3rem;
-  place-items: center;
-  border: 1px solid rgba(251, 247, 239, 0.42);
-  border-radius: 999px;
-  background: rgba(251, 247, 239, 0.14);
-  color: #fbf7ef;
-}
-
 .faq-item {
   border-radius: 1.1rem;
-  padding: 1.1rem 1.25rem;
+  padding: 0.9rem 1.1rem;
 }
 
 .faq-item summary {
@@ -323,27 +352,28 @@ a {
 }
 
 .faq-item p {
-  margin-top: 0.9rem;
-  line-height: 1.8;
+  margin-top: 0.65rem;
+  line-height: 1.6;
   color: rgba(43, 32, 24, 0.7);
 }
 
-.floating-whatsapp {
-  position: fixed;
-  right: 1.25rem;
-  bottom: 1.25rem;
-  z-index: 60;
-  display: inline-flex;
-  min-height: 3.2rem;
-  align-items: center;
-  justify-content: center;
-  border-radius: 999px;
+.faq-footer-section {
+  align-items: stretch;
+  padding-top: 3.6rem;
+  padding-bottom: 0;
+}
+
+.footer-in-faq {
+  width: 100vw;
+  margin: 1rem calc(50% - 50vw) 0;
   background: #2b2018;
-  padding: 0 1.25rem;
   color: #fbf7ef;
-  font-size: 0.9rem;
-  font-weight: 800;
-  box-shadow: 0 16px 36px rgba(43, 32, 24, 0.24);
+  padding: clamp(1.1rem, 2.3vw, 1.55rem) 1.25rem;
+}
+
+.footer-in-faq-inner {
+  margin: 0 auto;
+  max-width: 80rem;
 }
 
 .footer-social-link {
@@ -429,6 +459,7 @@ a {
 
 @media (max-width: 640px) {
   .section {
+    min-height: auto;
     padding: 4.6rem 1rem;
   }
 
@@ -436,8 +467,8 @@ a {
     width: 100%;
   }
 
-  .floating-whatsapp {
-    right: 1rem;
-    bottom: 1rem;
+  .simulator-whatsapp-button {
+    width: 100%;
   }
+
 }
