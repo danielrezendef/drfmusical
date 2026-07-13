@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "postinstall": "node scripts/clean-build-cache.mjs --open-next",
     "prebuild": "node scripts/clean-build-cache.mjs",
     "dev": "next dev",
     "build": "next build",

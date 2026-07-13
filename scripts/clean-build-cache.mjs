@@ -2,7 +2,9 @@ import { rmSync } from "node:fs";
 import { resolve } from "node:path";
 
 const root = process.cwd();
-const generatedDirs = [".next", ".open-next"];
+const includeOpenNext = process.argv.includes("--open-next");
+const generatedDirs = includeOpenNext ? [".next", ".open-next"] : [".next"];
+const removedDirs = [];
 
 for (const dir of generatedDirs) {
   const target = resolve(root, dir);
@@ -11,4 +13,9 @@ for (const dir of generatedDirs) {
   }
 
   rmSync(target, { force: true, recursive: true });
+  removedDirs.push(dir);
+}
+
+if (removedDirs.length > 0) {
+  console.log(`Cleaned generated build cache: ${removedDirs.join(", ")}`);
 }
