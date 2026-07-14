@@ -991,7 +991,7 @@ a {
   overflow: hidden;
 }
 
-.music-particles span {
+.music-particles > span {
   position: absolute;
   bottom: -4rem;
   color: rgba(185, 147, 79, 0.22);
@@ -999,6 +999,16 @@ a {
   animation-name: float-note;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
+}
+
+.music-particles > span > span {
+  display: block;
+  transform: translate(
+    var(--note-push-x, 0px),
+    var(--note-push-y, 0px)
+  );
+  transition: transform 280ms ease-out;
+  will-change: transform;
 }
 
 @keyframes float-note {

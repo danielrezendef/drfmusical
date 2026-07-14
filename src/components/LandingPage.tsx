@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { SoundtrackBuilder } from "@/components/soundtrack/SoundtrackBuilder";
 import {
   DEFAULT_WHATSAPP_MESSAGE,
@@ -77,6 +77,7 @@ function scrollToSimulator() {
 }
 
 function MusicParticles() {
+  const containerRef = useRef<HTMLDivElement>(null);
   const particles = useMemo(
     () =>
       Array.from({ length: 26 }, (_, index) => ({
@@ -85,13 +86,69 @@ function MusicParticles() {
         left: `${(index * 37) % 100}%`,
         delay: `${(index * 1.7) % 14}s`,
         duration: `${18 + (index % 8) * 2}s`,
-        size: `${0.9 + (index % 5) * 0.18}rem`,
+        size: `${1.8 + (index % 5) * 0.34}rem`,
       })),
     [],
   );
 
+  useEffect(() => {
+    let animationFrame: number | null = null;
+    let pointerX = -1000;
+    let pointerY = -1000;
+
+    function updateParticlePositions() {
+      animationFrame = null;
+      const notes = containerRef.current?.querySelectorAll<HTMLElement>("[data-floating-note]");
+      if (!notes) return;
+
+      notes.forEach((note) => {
+        const rect = note.parentElement?.getBoundingClientRect();
+        if (!rect) return;
+
+        const deltaX = rect.left + rect.width / 2 - pointerX;
+        const deltaY = rect.top + rect.height / 2 - pointerY;
+        const distance = Math.hypot(deltaX, deltaY);
+        const influenceRadius = 150;
+
+        if (distance > 0 && distance < influenceRadius) {
+          const force = (1 - distance / influenceRadius) * 28;
+          note.style.setProperty("--note-push-x", `${(deltaX / distance) * force}px`);
+          note.style.setProperty("--note-push-y", `${(deltaY / distance) * force}px`);
+        } else {
+          note.style.setProperty("--note-push-x", "0px");
+          note.style.setProperty("--note-push-y", "0px");
+        }
+      });
+    }
+
+    function handlePointerMove(event: PointerEvent) {
+      pointerX = event.clientX;
+      pointerY = event.clientY;
+      if (animationFrame === null) {
+        animationFrame = window.requestAnimationFrame(updateParticlePositions);
+      }
+    }
+
+    function resetParticles() {
+      pointerX = -1000;
+      pointerY = -1000;
+      if (animationFrame === null) {
+        animationFrame = window.requestAnimationFrame(updateParticlePositions);
+      }
+    }
+
+    window.addEventListener("pointermove", handlePointerMove, { passive: true });
+    document.documentElement.addEventListener("pointerleave", resetParticles);
+
+    return () => {
+      window.removeEventListener("pointermove", handlePointerMove);
+      document.documentElement.removeEventListener("pointerleave", resetParticles);
+      if (animationFrame !== null) window.cancelAnimationFrame(animationFrame);
+    };
+  }, []);
+
   return (
-    <div className="music-particles" aria-hidden="true">
+    <div ref={containerRef} className="music-particles" aria-hidden="true">
       {particles.map((particle) => (
         <span
           key={particle.id}
@@ -102,7 +159,7 @@ function MusicParticles() {
             fontSize: particle.size,
           }}
         >
-          {particle.note}
+          <span data-floating-note>{particle.note}</span>
         </span>
       ))}
     </div>
