@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useMemo, useState } from "react";
+import { SoundtrackBuilder } from "@/components/soundtrack/SoundtrackBuilder";
 import {
   DEFAULT_WHATSAPP_MESSAGE,
   EVENT_TYPES,
@@ -18,6 +19,7 @@ const navItems = [
   { label: "Sobre", href: "#sobre" },
   { label: "Momentos", href: "#momentos" },
   { label: "Simulador", href: "#simulador" },
+  { label: "Trilha sonora", href: "#trilha-sonora" },
   { label: "Dúvidas", href: "#duvidas" },
 ];
 
@@ -189,7 +191,7 @@ Gostaria de receber uma proposta personalizada.`;
             />
           </a>
 
-          <nav className="hidden items-center gap-8 text-base font-semibold text-espresso/78 lg:flex">
+          <nav className="hidden items-center gap-5 text-sm font-semibold text-espresso/78 xl:gap-7 xl:text-base lg:flex">
             {navItems.map((item) => (
               <a key={item.href} href={item.href} className="main-menu-link">
                 {item.label}
@@ -459,6 +461,8 @@ Gostaria de receber uma proposta personalizada.`;
           </div>
         </div>
       </section>
+
+      <SoundtrackBuilder />
 
       <section className="section relative">
         <ArtisticBackdrop />
