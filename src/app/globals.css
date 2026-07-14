@@ -163,6 +163,46 @@ a {
   color: #fbf7ef;
 }
 
+.main-menu-link {
+  position: relative;
+  padding-block: 0.45rem;
+  transition: color 180ms ease;
+}
+
+.main-menu-link::before,
+.main-menu-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  height: 2px;
+  width: 50%;
+  background: #b9934f;
+  transform: scaleX(0);
+  transition: transform 220ms ease;
+}
+
+.main-menu-link::before {
+  right: 50%;
+  transform-origin: right;
+}
+
+.main-menu-link::after {
+  left: 50%;
+  transform-origin: left;
+}
+
+.main-menu-link:hover,
+.main-menu-link:focus-visible {
+  color: #b9934f;
+}
+
+.main-menu-link:hover::before,
+.main-menu-link:hover::after,
+.main-menu-link:focus-visible::before,
+.main-menu-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
 .mobile-menu-button {
   display: grid;
   height: 2.7rem;
@@ -378,29 +418,37 @@ a {
 
 .footer-social-link {
   display: inline-grid;
-  height: 2.75rem;
-  width: 2.75rem;
+  height: 3rem;
+  width: 3rem;
   place-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.36);
   border-radius: 999px;
-  color: #fff;
-  box-shadow: 0 12px 26px rgba(43, 32, 24, 0.12);
+  overflow: hidden;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.28);
   transition:
     transform 180ms ease,
     box-shadow 180ms ease;
 }
 
 .footer-social-link:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 16px 34px rgba(43, 32, 24, 0.18);
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.34);
 }
 
-.footer-social-link-instagram {
-  background: radial-gradient(circle at 30% 105%, #feda75 0 22%, #fa7e1e 36%, #d62976 58%, #962fbf 76%, #4f5bd5 100%);
+.social-icon-sprite {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background-image: url("/social-icons-reference.png");
+  background-repeat: no-repeat;
+  background-size: 177.6px 177.6px;
 }
 
-.footer-social-link-whatsapp {
-  background: #25d366;
+.social-icon-instagram {
+  background-position: -24.96px -29.76px;
+}
+
+.social-icon-whatsapp {
+  background-position: -104.64px -29.76px;
 }
 
 .music-particles {

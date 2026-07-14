@@ -123,44 +123,6 @@ function ArtisticBackdrop() {
   );
 }
 
-function InstagramIcon() {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5">
-      <rect
-        x="4"
-        y="4"
-        width="16"
-        height="16"
-        rx="5"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-      />
-      <circle cx="12" cy="12" r="3.4" fill="none" stroke="currentColor" strokeWidth="1.8" />
-      <circle cx="17" cy="7" r="1.1" fill="currentColor" />
-    </svg>
-  );
-}
-
-function WhatsAppIcon() {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5">
-      <path
-        d="M12.1 4.2a7.7 7.7 0 0 0-6.6 11.7l-1 3.6 3.7-1a7.7 7.7 0 1 0 3.9-14.3Z"
-        fill="none"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="1.8"
-      />
-      <path
-        d="M9.1 8.6c.2-.5.4-.5.7-.5h.5c.2 0 .4.1.5.4l.7 1.6c.1.3.1.5-.1.7l-.4.5c-.1.2-.2.3 0 .6.4.7 1 1.3 1.7 1.7.3.2.4.1.6 0l.6-.5c.2-.2.4-.2.7-.1l1.5.7c.3.1.4.3.4.6v.4c0 .4-.2.7-.5.9-.5.3-1.4.6-2.7.2-2.2-.7-4.6-3-5.3-5.2-.4-1.2-.1-2 .2-2.5Z"
-        fill="currentColor"
-      />
-    </svg>
-  );
-}
-
 export function LandingPage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [videoFailed, setVideoFailed] = useState(false);
@@ -229,7 +191,7 @@ Gostaria de receber uma proposta personalizada.`;
 
           <nav className="hidden items-center gap-8 text-base font-semibold text-espresso/78 lg:flex">
             {navItems.map((item) => (
-              <a key={item.href} href={item.href} className="transition hover:text-gold">
+              <a key={item.href} href={item.href} className="main-menu-link">
                 {item.label}
               </a>
             ))}
@@ -304,14 +266,11 @@ Gostaria de receber uma proposta personalizada.`;
             className="mb-8 h-auto w-36 object-contain sm:w-44"
             priority
           />
-          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.32em] text-umber">
-            Itaúna/MG e região
-          </p>
           <h1 className="max-w-4xl font-display text-5xl font-semibold leading-[0.98] text-espresso sm:text-7xl lg:text-8xl">
             A trilha sonora do seu grande sonho
           </h1>
           <p className="mt-7 max-w-2xl text-lg leading-8 text-espresso/78 sm:text-xl">
-            Música ao vivo para casamentos, cerimônias e recepções.
+            Música ao vivo para o seu melhor momento.
           </p>
           <div className="mt-10 flex w-full flex-col justify-center gap-3 sm:w-auto sm:flex-row">
             <button className="btn btn-gold" type="button" onClick={scrollToSimulator}>
@@ -550,7 +509,7 @@ Gostaria de receber uma proposta personalizada.`;
             <div className="footer-in-faq-inner flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
               <div className="max-w-md">
                 <Image
-                  src="/logo-drf.png"
+                  src="/logo-drf-branca.png"
                   alt="DRF Musical"
                   width={120}
                   height={72}
@@ -569,7 +528,7 @@ Gostaria de receber uma proposta personalizada.`;
                     target="_blank"
                     rel="noreferrer"
                   >
-                    <InstagramIcon />
+                    <span className="social-icon-sprite social-icon-instagram" aria-hidden="true" />
                   </a>
                   <a
                     className="footer-social-link footer-social-link-whatsapp"
@@ -578,7 +537,7 @@ Gostaria de receber uma proposta personalizada.`;
                     target="_blank"
                     rel="noreferrer"
                   >
-                    <WhatsAppIcon />
+                    <span className="social-icon-sprite social-icon-whatsapp" aria-hidden="true" />
                   </a>
                 </div>
                 <p className="text-ivory/55">© DRF Musical. Todos os direitos reservados.</p>
