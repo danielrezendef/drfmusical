@@ -10,8 +10,13 @@ type SongCardProps = {
 export function SongCard({ song, selected, onToggle }: SongCardProps) {
   return (
     <article className={`soundtrack-song-card ${selected ? "is-selected" : ""}`}>
-      <div>
-        <h4>{song.title}</h4>
+      <div className="song-heading">
+        <div>
+          <h4>{song.title}</h4>
+          {song.featured === true && (
+            <span className="featured-song-badge">⭐ Mais escolhida</span>
+          )}
+        </div>
         <p>{song.artist}</p>
       </div>
 

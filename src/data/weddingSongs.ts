@@ -143,7 +143,7 @@ export const weddingMoments: WeddingMoment[] = [
         youtubeUrl: "https://www.youtube.com/results?search_query=No+Fundo+do+Cora%C3%A7%C3%A3o+Sandy+%26+Junior",
       },
       {
-        id: "pra-voce-guardei-o-amor",
+        id: "pra-voce-guardei-o-amor-entrada-noiva",
         title: "Pra Você Guardei o Amor",
         artist: "Nando Reis e Ana Cañas",
         spotifyUrl: "https://open.spotify.com/search/Pra%20Voc%C3%AA%20Guardei%20o%20Amor%20Nando%20Reis%20e%20Ana%20Ca%C3%B1as",
@@ -345,7 +345,7 @@ export const weddingMoments: WeddingMoment[] = [
         youtubeUrl: "https://www.youtube.com/results?search_query=P%C3%A3o+da+Vida+Minist%C3%A9rio+Amor+e+Adora%C3%A7%C3%A3o",
       },
       {
-        id: "terra-seca",
+        id: "terra-seca-comunhao",
         title: "Terra Seca",
         artist: "Fraternidade São João Paulo II",
         featured: true,
@@ -411,7 +411,7 @@ export const weddingMoments: WeddingMoment[] = [
         youtubeUrl: "https://www.youtube.com/results?search_query=Eis-me+Aqui+Colo+de+Deus",
       },
       {
-        id: "eu-juro",
+        id: "eu-juro-assinaturas",
         title: "Eu Juro",
         artist: "Leandro & Leonardo",
         spotifyUrl: "https://open.spotify.com/search/Eu%20Juro%20Leandro%20%26%20Leonardo",
@@ -453,7 +453,7 @@ export const weddingMoments: WeddingMoment[] = [
         youtubeUrl: "https://www.youtube.com/results?search_query=Minha+Ess%C3%AAncia+Thiago+Brado",
       },
       {
-        id: "mistica-sublime",
+        id: "mistica-sublime-assinaturas",
         title: "Mística Sublime",
         artist: "Colo de Deus",
         featured: true,
@@ -476,7 +476,7 @@ export const weddingMoments: WeddingMoment[] = [
         youtubeUrl: "https://www.youtube.com/results?search_query=O+C%C3%A9u+se+Abre+Can%C3%A7%C3%A3o+Religiosa",
       },
       {
-        id: "pra-voce-guardei-o-amor",
+        id: "pra-voce-guardei-o-amor-assinaturas",
         title: "Pra Você Guardei o Amor",
         artist: "Nando Reis e Ana Cañas",
         spotifyUrl: "https://open.spotify.com/search/Pra%20Voc%C3%AA%20Guardei%20o%20Amor%20Nando%20Reis%20e%20Ana%20Ca%C3%B1as",
@@ -528,7 +528,7 @@ export const weddingMoments: WeddingMoment[] = [
         youtubeUrl: "https://www.youtube.com/results?search_query=Eu+Sei+Que+Vou+Te+Amar+Tom+Jobim+e+Vinicius+de+Moraes",
       },
       {
-        id: "o-amor-me-disse",
+        id: "o-amor-me-disse-fotos",
         title: "O Amor Me Disse",
         artist: "Canção Religiosa",
         featured: true,
@@ -536,7 +536,7 @@ export const weddingMoments: WeddingMoment[] = [
         youtubeUrl: "https://www.youtube.com/results?search_query=O+Amor+Me+Disse+Can%C3%A7%C3%A3o+Religiosa",
       },
       {
-        id: "quando-deus-criou-voce",
+        id: "quando-deus-criou-voce-fotos",
         title: "Quando Deus Criou Você",
         artist: "Leonardo Gonçalves e Tatiana Costa",
         spotifyUrl: "https://open.spotify.com/search/Quando%20Deus%20Criou%20Voc%C3%AA%20Leonardo%20Gon%C3%A7alves%20e%20Tatiana%20Costa",
@@ -566,14 +566,14 @@ export const weddingMoments: WeddingMoment[] = [
         youtubeUrl: "https://www.youtube.com/results?search_query=A+Vida+%C3%A9+Boa+com+Voc%C3%AA+Bryan+Behr",
       },
       {
-        id: "o-amor-me-disse",
+        id: "o-amor-me-disse-saida-noivos",
         title: "O Amor Me Disse",
         artist: "Canção Religiosa",
         spotifyUrl: "https://open.spotify.com/search/O%20Amor%20Me%20Disse%20Can%C3%A7%C3%A3o%20Religiosa",
         youtubeUrl: "https://www.youtube.com/results?search_query=O+Amor+Me+Disse+Can%C3%A7%C3%A3o+Religiosa",
       },
       {
-        id: "o-ceu-se-abre",
+        id: "o-ceu-se-abre-saida-noivos",
         title: "O Céu se Abre",
         artist: "Canção Religiosa",
         spotifyUrl: "https://open.spotify.com/search/O%20C%C3%A9u%20se%20Abre%20Can%C3%A7%C3%A3o%20Religiosa",

@@ -36,6 +36,7 @@ function validateSelections(value: unknown): SelectionMap {
 export function SoundtrackBuilder() {
   const [selectedSongIds, setSelectedSongIds] = useState<SelectionMap>({});
   const [openMomentId, setOpenMomentId] = useState<string>(weddingMoments[0].id);
+  const [searchQuery, setSearchQuery] = useState("");
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [storageReady, setStorageReady] = useState(false);
   const toastTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -176,11 +177,21 @@ export function SoundtrackBuilder() {
 
         <div className="soundtrack-layout">
           <div className="soundtrack-moments">
+            <label className="soundtrack-search">
+              <span>Buscar no repertório</span>
+              <input
+                type="search"
+                value={searchQuery}
+                onChange={(event) => setSearchQuery(event.target.value)}
+                placeholder="Digite o título ou artista"
+              />
+            </label>
             {weddingMoments.map((moment) => (
               <WeddingMomentAccordion
                 key={moment.id}
                 moment={moment}
                 isOpen={openMomentId === moment.id}
+                searchQuery={searchQuery}
                 selectedSongIds={selectedSongIds[moment.id]}
                 onToggle={() => setOpenMomentId((current) => current === moment.id ? "" : moment.id)}
                 onSelect={(songId) => toggleSong(moment.id, songId)}

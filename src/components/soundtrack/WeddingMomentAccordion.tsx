@@ -5,6 +5,7 @@ import { SongCard } from "./SongCard";
 type WeddingMomentAccordionProps = {
   moment: WeddingMoment;
   isOpen: boolean;
+  searchQuery?: string;
   selectedSongIds?: string[];
   onToggle: () => void;
   onSelect: (songId: string) => void;
@@ -13,6 +14,7 @@ type WeddingMomentAccordionProps = {
 export function WeddingMomentAccordion({
   moment,
   isOpen,
+  searchQuery = "",
   selectedSongIds = [],
   onToggle,
   onSelect,
@@ -20,6 +22,20 @@ export function WeddingMomentAccordion({
   const panelId = `soundtrack-panel-${moment.id}`;
   const buttonId = `soundtrack-button-${moment.id}`;
   const maxSelections = moment.maxSelections ?? 1;
+  const normalizedQuery = searchQuery.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase("pt-BR");
+  const visibleSongs = [...moment.songs]
+    .sort((first, second) => {
+      const featuredOrder = Number(Boolean(second.featured)) - Number(Boolean(first.featured));
+      return featuredOrder || first.title.localeCompare(second.title, "pt-BR", { sensitivity: "base" });
+    })
+    .filter((song) => {
+      if (!normalizedQuery) return true;
+      const searchableText = `${song.title} ${song.artist}`
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLocaleLowerCase("pt-BR");
+      return searchableText.includes(normalizedQuery);
+    });
   const selectedSongs = moment.songs.filter((song) => selectedSongIds.includes(song.id));
   const selectionSummary = maxSelections > 1
     ? `${selectedSongs.length} de ${maxSelections} músicas escolhidas`
@@ -64,7 +80,7 @@ export function WeddingMomentAccordion({
               </p>
             )}
             <div className="soundtrack-song-list">
-              {moment.songs.map((song) => (
+              {visibleSongs.map((song) => (
                 <SongCard
                   key={song.id}
                   song={song}
@@ -72,6 +88,11 @@ export function WeddingMomentAccordion({
                   onToggle={() => onSelect(song.id)}
                 />
               ))}
+              {visibleSongs.length === 0 && (
+                <p className="soundtrack-search-empty">
+                  Nenhuma música encontrada neste momento.
+                </p>
+              )}
             </div>
           </div>
         </div>
