@@ -72,10 +72,6 @@ const faqItems = [
   },
 ];
 
-function scrollToSimulator() {
-  document.getElementById("simulador")?.scrollIntoView({ behavior: "smooth" });
-}
-
 function MusicParticles() {
   const containerRef = useRef<HTMLDivElement>(null);
   const particles = useMemo(
@@ -240,7 +236,7 @@ Gostaria de receber uma proposta personalizada.`;
           <a href="#inicio" className="flex items-center gap-3" aria-label="DRF Musical">
             <Image
               src="/logo-drf.png"
-              alt="DRF Musical"
+              alt="Logo do DRF Musical"
               width={122}
               height={72}
               className="h-14 w-auto object-contain"
@@ -319,7 +315,7 @@ Gostaria de receber uma proposta personalizada.`;
         <div className="relative z-10 mx-auto flex min-h-screen max-w-5xl flex-col items-center justify-center px-5 pb-14 pt-28 text-center">
           <Image
             src="/logo-drf.png"
-            alt="DRF Musical"
+            alt="Logo do DRF Musical"
             width={190}
             height={112}
             className="mb-8 h-auto w-36 object-contain sm:w-44"
@@ -332,9 +328,9 @@ Gostaria de receber uma proposta personalizada.`;
             Música ao vivo para o seu melhor momento.
           </p>
           <div className="mt-10 flex w-full flex-col justify-center gap-3 sm:w-auto sm:flex-row">
-            <button className="btn btn-gold" type="button" onClick={scrollToSimulator}>
+            <a className="btn btn-gold" href="#simulador">
               Simular orçamento
-            </button>
+            </a>
             <a
               className="btn btn-light"
               href={whatsappUrl(DEFAULT_WHATSAPP_MESSAGE)}
@@ -571,7 +567,7 @@ Gostaria de receber uma proposta personalizada.`;
               <div className="max-w-md">
                 <Image
                   src="/logo-drf-branca.png"
-                  alt="DRF Musical"
+                  alt="Logo do DRF Musical"
                   width={120}
                   height={72}
                   className="mb-4 h-auto w-28 object-contain"
