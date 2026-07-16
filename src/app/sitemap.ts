@@ -1,21 +1,45 @@
 import type { MetadataRoute } from "next";
+import { getPublishedArticles, inspirationCategories } from "@/content/inspiracoes";
 import { SITE_URL } from "@/lib/seo";
 
-const publicRoutes = [
-  {
-    path: "/",
-    changeFrequency: "monthly" as const,
-    priority: 1,
-  },
-];
-
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date();
+  const articles = getPublishedArticles();
+  const latestPublication = articles[0]?.updatedAt ?? articles[0]?.publishedAt;
 
-  return publicRoutes.map((route) => ({
-    url: new URL(route.path, SITE_URL).toString(),
-    lastModified,
-    changeFrequency: route.changeFrequency,
-    priority: route.priority,
+  const staticRoutes: MetadataRoute.Sitemap = [
+    {
+      url: SITE_URL,
+      lastModified: new Date("2026-07-15T00:00:00Z"),
+      changeFrequency: "monthly",
+      priority: 1,
+    },
+    {
+      url: `${SITE_URL}/inspiracoes`,
+      lastModified: latestPublication ? new Date(`${latestPublication}T00:00:00Z`) : new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+  ];
+
+  const categoryRoutes: MetadataRoute.Sitemap = inspirationCategories.map((category) => {
+    const latestCategoryArticle = articles.find((article) => article.category === category.slug);
+
+    return {
+      url: `${SITE_URL}/inspiracoes/${category.slug}`,
+      lastModified: latestCategoryArticle
+        ? new Date(`${latestCategoryArticle.updatedAt ?? latestCategoryArticle.publishedAt}T00:00:00Z`)
+        : new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    };
+  });
+
+  const articleRoutes: MetadataRoute.Sitemap = articles.map((article) => ({
+    url: `${SITE_URL}/inspiracoes/${article.slug}`,
+    lastModified: new Date(`${article.updatedAt ?? article.publishedAt}T00:00:00Z`),
+    changeFrequency: "monthly",
+    priority: article.featured ? 0.8 : 0.7,
   }));
+
+  return [...staticRoutes, ...categoryRoutes, ...articleRoutes];
 }

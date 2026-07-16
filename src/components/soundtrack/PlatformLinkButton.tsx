@@ -1,3 +1,7 @@
+"use client";
+
+import { trackEvent } from "@/lib/analytics";
+
 type PlatformLinkButtonProps = {
   platform: "spotify" | "youtube";
   href: string;
@@ -31,6 +35,7 @@ export function PlatformLinkButton({ platform, href }: PlatformLinkButtonProps) 
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`${label} (abre em uma nova aba)`}
+      onClick={() => trackEvent(platform === "spotify" ? "spotify_click" : "youtube_click")}
     >
       {platform === "spotify" ? <SpotifyIcon /> : <YouTubeIcon />}
       <span>{label}</span>

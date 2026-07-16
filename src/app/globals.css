@@ -969,6 +969,21 @@ a {
   max-width: 80rem;
 }
 
+.footer-inspiration-link {
+  align-self: flex-start;
+  color: rgba(251, 247, 239, 0.78);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-color: rgba(229, 209, 163, 0.5);
+  text-underline-offset: 0.3rem;
+}
+
+@media (min-width: 768px) {
+  .footer-inspiration-link {
+    align-self: flex-end;
+  }
+}
+
 .footer-social-link {
   display: inline-grid;
   height: 3rem;

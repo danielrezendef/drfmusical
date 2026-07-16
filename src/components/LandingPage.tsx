@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { SoundtrackBuilder } from "@/components/soundtrack/SoundtrackBuilder";
 import {
@@ -20,6 +21,7 @@ const navItems = [
   { label: "Momentos", href: "#momentos" },
   { label: "Simulador", href: "#simulador" },
   { label: "Trilha sonora", href: "#trilha-sonora" },
+  { label: "Inspirações", href: "/inspiracoes" },
   { label: "Dúvidas", href: "#duvidas" },
 ];
 
@@ -246,9 +248,9 @@ Gostaria de receber uma proposta personalizada.`;
 
           <nav className="hidden items-center gap-5 text-sm font-semibold text-espresso/78 xl:gap-7 xl:text-base lg:flex">
             {navItems.map((item) => (
-              <a key={item.href} href={item.href} className="main-menu-link">
+              <Link key={item.href} href={item.href} className="main-menu-link">
                 {item.label}
-              </a>
+              </Link>
             ))}
           </nav>
 
@@ -269,14 +271,14 @@ Gostaria de receber uma proposta personalizada.`;
           <div className="border-t border-espresso/10 bg-ivory/96 px-5 py-5 shadow-soft lg:hidden">
             <nav className="mx-auto flex max-w-7xl flex-col gap-4 text-base font-semibold">
               {navItems.map((item) => (
-                <a
+                <Link
                   key={item.href}
                   href={item.href}
                   onClick={() => setMenuOpen(false)}
                   className="rounded-full px-2 py-2 text-espresso/82"
                 >
                   {item.label}
-                </a>
+                </Link>
               ))}
               <a
                 className="btn btn-dark mt-2"
@@ -519,6 +521,23 @@ Gostaria de receber uma proposta personalizada.`;
 
       <section className="section relative">
         <ArtisticBackdrop />
+        <div className="section-inner grid items-center gap-8 lg:grid-cols-[1fr_auto]">
+          <div className="max-w-3xl">
+            <p className="eyebrow">Inspirações</p>
+            <h2 className="section-title">Ideias para cada capítulo do seu casamento</h2>
+            <p className="section-subtitle">
+              Explore guias, repertórios e referências para escolher a música de cada
+              momento com mais segurança e significado.
+            </p>
+          </div>
+          <Link className="btn btn-gold" href="/inspiracoes">
+            Explorar Inspirações
+          </Link>
+        </div>
+      </section>
+
+      <section className="section relative">
+        <ArtisticBackdrop />
         <div className="section-inner">
           <div className="max-w-3xl">
             <p className="eyebrow">Processo</p>
@@ -577,6 +596,9 @@ Gostaria de receber uma proposta personalizada.`;
                 </p>
               </div>
               <div className="flex flex-col gap-3 text-sm md:items-end">
+                <Link className="footer-inspiration-link" href="/inspiracoes">
+                  Explorar Inspirações
+                </Link>
                 <div className="flex items-center gap-3 md:justify-end">
                   <a
                     className="footer-social-link footer-social-link-instagram"
