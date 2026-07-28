@@ -1,6 +1,6 @@
 {
   "name": "drfmusical",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "scripts": {
     "postinstall": "node scripts/clean-build-cache.mjs --open-next",
