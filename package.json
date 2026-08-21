@@ -3,14 +3,19 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "build": "next build",
     "postinstall": "node scripts/clean-build-cache.mjs --open-next",
     "prebuild": "node scripts/clean-build-cache.mjs",
     "dev": "next dev",
-    "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "upload": "opennextjs-cloudflare build && opennextjs-cloudflare upload",
+    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
   },
   "dependencies": {
+    "@opennextjs/cloudflare": "^1.20.1",
     "next": "^15.4.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
@@ -24,6 +29,7 @@
     "eslint-config-next": "^15.4.0",
     "postcss": "^8.5.1",
     "tailwindcss": "^3.4.17",
-    "typescript": "^5.7.3"
+    "typescript": "^5.7.3",
+    "wrangler": "^4.111.0"
   }
 }
